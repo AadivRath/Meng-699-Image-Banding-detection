@@ -51,12 +51,12 @@ class Shape_work:
     # getting information about the starting and ending coordinates of these patches in the image
     def iterate_patch(self):
         """
-        uses h : height of image , 
+        uses h : height of image, 
              w: width of image
         returns:
-            An object conatining four combination of dictionaries and a lists associated patches informatrion
-            each dictinary contains the patch location identifier and intializes a a list value for that patch as [1,1000]
-            each list contains the starting cordiante of associated patches
+            An object conatining four combination of dictionaries and a lists associated patches information
+            each dictionary contains the patch location identifier and intializes a a list value for that patch as [1,1000]
+            each list contains the starting cordinate of associated patches.
         
         """
         # print commands for debugging and sanity check
@@ -67,8 +67,8 @@ class Shape_work:
         w = self.w
        
         # gathering step size
-        # h_step: represents the number of patches which can be extarcted in vertical direction without overlap
-        # w_step: represents the number of patches which can be extarcted in  horizontal  direction without overlap
+        # h_step: represents the number of patches which can be extracted in vertical direction without overlap
+        # w_step: represents the number of patches which can be extracted in  horizontal  direction without overlap
         h_step = int(h/235)
         w_step = int(w/235)
 
@@ -278,7 +278,7 @@ def h_w_neighbours_index (h,w,h_org,w_org,h_end,w_end):
 if __name__ == "__main__":
     
     ## getting image data from images path
-    file_folder = os.path.abspath(r"D:\GitHub Repositories\Meng-699-Image-Banding-detection\Demo\Given_image_path")
+    file_folder= "D:\GitHub Repositories\Meng-699-Image-Banding-detection\Demo\Given_image_path"
     print(f"Looking for images in: {file_folder}")
     # alpha : weight associated with model prediction for main patch for which we are predicting the overall score
     # beta : weight associated with model prediction for immediate top, left, right and bottom patches for the main patch
@@ -401,7 +401,7 @@ if __name__ == "__main__":
             # Printing scores for each file
             print(f"score for {file} is {overall_score}")
             
-            dict_score[file] = final_score
+            dict_score[file] = overall_score
             df = pd.DataFrame([dict_score]).T
             
             # saving results in a csv file
