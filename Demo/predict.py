@@ -12,6 +12,10 @@ import tensorflow as tf
 import time
 import statistics
 import pandas as pd
+import keras
+from keras.layers import TFSMLayer
+from tensorflow.python.keras.layers import Dense
+
 
 
 # Image_data class for converting image into numpy array after scaling the pixel values
@@ -274,13 +278,8 @@ def h_w_neighbours_index (h,w,h_org,w_org,h_end,w_end):
 if __name__ == "__main__":
     
     ## getting image data from images path
-    file_folder = "./Given_image_path/"
-    
-    # Initialzing dictinoary to store scores for each image
-    dict_score = {}
-
-    # setting alpha beta and gamma
-    # these are weight associated with immediate neighbors of a given pacth
+    file_folder = os.path.abspath(r"D:\GitHub Repositories\Meng-699-Image-Banding-detection\Demo\Given_image_path")
+    print(f"Looking for images in: {file_folder}")
     # alpha : weight associated with model prediction for main patch for which we are predicting the overall score
     # beta : weight associated with model prediction for immediate top, left, right and bottom patches for the main patch
     # gamma : weight associated with model prediction for immediate top-left, top-right , bottam -left and botttom- right patches of main patch
@@ -310,13 +309,12 @@ if __name__ == "__main__":
     
     # loading the trained CNN patches model
     ## model naem to be changed and experimented
-    model = tf.keras.models.load_model('./model_512_batches_27july2020_epoch14/')
-    
+    model = TFSMLayer('Demo/CNN_classifier', call_endpoint='serving_default')
     # Iterating over the files in file_folder
     for file in os.listdir(file_folder):
         
             # reading the file data and extarting pixel data in form numpy arrays
-            path = file_folder+file
+            path = os.path.join(file_folder, file)
             obj = Image_data(path)
             image_data = obj.np_data()
             
